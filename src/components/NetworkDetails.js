@@ -3,6 +3,8 @@ import copyIcon from '../assets/images/icons/copy.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import numeral from 'numeral'
 import { getAddressUrl } from '../stores/utils/web3'
+import { formatBalance } from './utils/utils'
+
 
 export const NetworkDetails = ({
   isHome,
@@ -25,9 +27,7 @@ export const NetworkDetails = ({
   const totalTitle = isHome ? 'Locked POA in Bridge Contract' : 'POA20 Tokens Amount'
   const totalAmount = isHome ? totalBalance : totalSupply
   const explorerPath = getAddressUrl(networkData.id)
-  const formattedBalance = isNaN(numeral(balance).format('0.00', Math.floor))
-    ? numeral(0).format('0,0.00', Math.floor)
-    : numeral(balance).format('0,0.00', Math.floor)
+  const formattedBalance = formatBalance(balance)
 
   return (
     <div className="network-details">
